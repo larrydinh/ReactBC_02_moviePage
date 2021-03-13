@@ -5,12 +5,14 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Header from "./Components/Header/Header";
+import Loading from "./Components/Loading/Loading";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header/>
+        <Header/> 
+      <Loading/>
         <Switch>
         <Route exact path="/home/" component={Home} />
         <Route exact path="/contact/" component={Contact} />

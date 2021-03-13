@@ -1,32 +1,41 @@
 import React, { Component } from "react";
+import {connect} from "react-redux"
 import axios from "axios";
-export default class Home extends Component {
+import {layDanhSachPhimAction} from "../../redux/actions/PhimActions.js"
+class Home extends Component {
   //state danh sach phim
-  state = {
-    arrFilms: [],
-  };
+  // state = {
+  //   arrFilms: [],
+  // };
 
   loadFilm = () => {
-    //Dung axios goi lay thong tin tu backend ve qua api
-    const promise = axios({
-      url:
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
-      method: "GET",
-    });
-    //Xu ly thanh cong
-    promise.then((result) => {
-        console.log("result", result.data);
-      this.setState({
-        arrFilms: result.data,
-      });
-    });
-    // Xu ly khi request loi
-    promise.catch((error) => {
-      console.log("err", error.response.data);
-    });
+    // Dung axios goi lay thong tin tu backend ve qua api
+    // const promise = axios({
+    //   url:
+    //     "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
+    //   method: "GET",
+    // });
+    // //Xu ly thanh cong
+    // promise.then((result) => {
+    //     console.log("result", result.data);
+    //     // lay du lieu ve dispatch len reducer 
+    //     this.props.dispatch({
+    //       type: 'LAY_DANH_SACH_PHIM',
+    //       mangPhim: result.data
+    //     })
+    //   this.setState({
+    //     arrFilms: result.data,
+    //   });
+    // });
+    // // Xu ly khi request loi
+    // promise.catch((error) => {
+    //   console.log("err", error.response.data);
+    // });
+
+    this.props.dispatch(layDanhSachPhimAction())
   };
   renderFilms = () => {
-    return this.state.arrFilms.map((film, index) => {
+    return this.props.mangPhim.map((film, index) => {
       return (
         <div className="col-4" key={index}>
           <div className="card text-white bg-primary">
@@ -48,7 +57,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className="container">
-        <h1 className="text-center">Home</h1>
+        <h1 className="text-center"> </h1>
         <button className="btn btn-primary" onClick={this.loadFilm}>Lấy danh sách film</button>
         <div className="display-4"><h1 className="text-center text-primary">Danh sach phim</h1></div>
         <div className="row">{this.renderFilms()}</div>
@@ -61,3 +70,13 @@ export default class Home extends Component {
       this.loadFilm();
   }
 }
+
+
+  
+
+ const mapStateToProps = (state) => {
+  return {
+    mangPhim: state.PhimReducer.mangPhim
+  }
+}
+export default connect(mapStateToProps)(Home)
