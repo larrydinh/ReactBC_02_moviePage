@@ -22,26 +22,55 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="collapsibleNavId">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
               <li className="nav-item active">
-                <NavLink activeStyle={{fontWeight:'bold'}} activeClassName="bg-dark text-light" className="nav-link" to="/home">
+                <NavLink
+                  activeStyle={{ fontWeight: "bold" }}
+                  activeClassName="bg-dark text-light"
+                  className="nav-link"
+                  to="/home"
+                >
                   Home <span className="sr-only">(current)</span>
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink activeStyle={{fontWeight:'bold'}} activeClassName="bg-dark text-light" className="nav-link" to="/contact">
+                <NavLink
+                  activeStyle={{ fontWeight: "bold" }}
+                  activeClassName="bg-dark text-light"
+                  className="nav-link"
+                  to="/contact"
+                >
                   Contact
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink activeStyle={{fontWeight:'bold'}} activeClassName="bg-dark text-light" className="nav-link" to="/login">
+                <NavLink
+                  activeStyle={{ fontWeight: "bold" }}
+                  activeClassName="bg-dark text-light"
+                  className="nav-link"
+                  to="/login"
+                >
                   Login
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink activeStyle={{fontWeight:'bold'}} activeClassName="bg-dark text-light" className="nav-link" to="/register">
+                <NavLink
+                  activeStyle={{ fontWeight: "bold" }}
+                  activeClassName="bg-dark text-light"
+                  className="nav-link"
+                  to="/register"
+                >
                   Register
                 </NavLink>
               </li>
-
+              <li className="nav-item">
+                <NavLink
+                  activeStyle={{ fontWeight: "bold" }}
+                  activeClassName="bg-dark text-light"
+                  className="nav-link"
+                  to="/lifecycle"
+                >
+                  Life Cycle
+                </NavLink>
+              </li>
               <li className="nav-item dropdown">
                 <NavLink
                   className="nav-link dropdown-toggle"
@@ -62,6 +91,35 @@ export default class Header extends Component {
                   </NavLink>
                 </div>
               </li>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="dropdownId"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <div className="dropdown-menu" aria-labelledby="dropdownId">
+                  <NavLink className="dropdown-item" to="/usestatedemo">
+                    UseState Hook
+                  </NavLink>
+                </div>
+              </li>
+
+              {/* BT chon xe  */}
+              <li className="nav-item">
+                <NavLink
+                  activeStyle={{ fontWeight: "bold" }}
+                  activeClassName="bg-dark text-light"
+                  className="nav-link"
+                  to="/baitapchonxe"
+                >
+                  BTChonXe
+                </NavLink>
+                </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input
