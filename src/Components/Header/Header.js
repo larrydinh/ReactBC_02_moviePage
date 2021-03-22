@@ -106,6 +106,12 @@ export default class Header extends Component {
                   <NavLink className="dropdown-item" to="/usestatedemo">
                     UseState Hook
                   </NavLink>
+                  <NavLink className="dropdown-item" to="/useeffecthome">
+                    UseEffect Home
+                  </NavLink>
+                  <NavLink className="dropdown-item" to="/reduxhook">
+                    Redux Hook
+                  </NavLink>
                 </div>
               </li>
 

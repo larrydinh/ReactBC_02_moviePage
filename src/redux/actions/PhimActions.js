@@ -22,6 +22,24 @@ export const layDanhSachPhimAction = () => {
       dispatch({
         type: "closeLoading",
       });
-    }, 2000);
+    }, 1000);
+  };
+};
+
+export const layThongTinChiTietPhim = (maPhim) => {
+  return async (dispatch) => {
+    try {
+      let result = await axios({
+        url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`,
+        method: "GET",
+      });
+      //Sau khi lay du lieu tu api ta se dua du lieu len reducer = dispatch
+      dispatch({
+        type:'LAY_CHI_TIET_PHIM',
+        chiTietPhim: result.data
+      })
+    } catch (errors) {
+      console.log(errors);
+    }
   };
 };

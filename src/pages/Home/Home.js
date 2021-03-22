@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {connect} from "react-redux"
 import axios from "axios";
 import {layDanhSachPhimAction} from "../../redux/actions/PhimActions.js"
+import { NavLink } from "react-router-dom";
 class Home extends Component {
   //state danh sach phim
   // state = {
@@ -46,6 +47,7 @@ class Home extends Component {
             />
             <div className="card-body">
               <h4 className="card-title">{film.tenPhim}</h4>
+              <NavLink className="btn btn-success" to={`detail/${film.maPhim}`}>DAT VE</NavLink>
               <p className="card-text">Text</p>
             </div>
           </div>
