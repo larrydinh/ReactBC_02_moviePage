@@ -12,33 +12,53 @@ import BaiTapChonXe from "./pages/Hooks/BaiTapChonXe";
 import UseEffectHome from "./pages/Hooks/UseEffectHome";
 import ReduxHookHome from "./pages/Hooks/ReduxHookHome";
 import Details from "./pages/Details/Details";
+import HookUseCallBack from "./pages/Hooks/HookUseCallBack";
+import HookUseMemo from "./pages/Hooks/HookUseMemo";
+import UseRef from "./pages/Hooks/UseRef";
+import ParentComponent from "./pages/HOC/ParentComponent";
+import { HomeTemplate } from "./templates/HomeTemplate";
+import { AdminTemplate } from "./templates/AdminTemplate";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header/> 
-      <Loading/>
+        {/* <Header/>  */}
+        <Loading />
         <Switch>
-        <Route exact path="/home/" component={Home} />
-        <Route exact path="/contact/" component={Contact} />
-        <Route exact path="/login/" component={Login} />
-        <Route exact path="/register/" component={Register} />
-        <Route exac path="/lifecycle" render={(propsRoute)=>{
-          //Tham so chua cac props cua the route
-          return <div>
-            <h3>Component lifecycle</h3>
-            <LifeCycle {...propsRoute}/>
-          </div>
-        }}/>
-        <Route exact path ="/usestatedemo"component={UseStateHook}/>
-        <Route exact path ="/baitapchonxe"component={BaiTapChonXe}/>
-        <Route exact path ="/useeffecthome"component={UseEffectHome}/>
-        <Route exact path ="/reduxhook"component={ReduxHookHome}/>
-        <Route exact path ="/detail/:id"component={Details}/>
+          <HomeTemplate exact path="/home" Component={Home} />
+          {/* <Route exact path="/home/" component={Home} /> */}
+          <HomeTemplate exact path="/contact/" Component={Contact} />
+         
+         
+          <AdminTemplate exact path="/login/" Component={Login} />
+          <HomeTemplate exact path="/register/" Component={Register} />
+          {/* <Route
+            exac
+            path="/lifecycle"
+            render={(propsRoute) => {
+              //Tham so chua cac props cua the route
+              return (
+                <div>
+                  <h3>Component lifecycle</h3>
+                  <LifeCycle {...propsRoute} />
+                </div>
+              );
+            }}
+          /> */}
+          <HomeTemplate exact path="/usestatedemo" Component={UseStateHook} />
+          <HomeTemplate exact path="/baitapchonxe" Component={BaiTapChonXe} />
+          <HomeTemplate exact path="/useeffecthome" Component={UseEffectHome} />
+          <HomeTemplate exact path="/reduxhook" Component={ReduxHookHome} />
+          <HomeTemplate exact path="/usecallback" Component={HookUseCallBack} />
+          <HomeTemplate exact path="/usememo" Component={HookUseMemo} />
+          <HomeTemplate exact path="/useref" Component={UseRef} />
+          <HomeTemplate exact path="/parentcomponent" Component={ParentComponent} />
 
-        {/* Route mac dinh de duoi cung cua ung dung  */}
-        <Route exact path="/" component={Home}/>
+          <HomeTemplate exact path="/detail/:id" Component={Details} />
+
+          {/* Route mac dinh de duoi cung cua ung dung  */}
+          <HomeTemplate exact path="/" Component={Home} />
         </Switch>
       </div>
     </BrowserRouter>

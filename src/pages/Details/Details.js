@@ -27,7 +27,7 @@ export default function Details(props) {
               <tr>
                 <th>Ten phim</th>
                 <th>{chiTietPhim.tenPhim}</th>
-              </tr>
+              </tr> 
               <tr>
                 <th>Mo ta</th>
                 <th>

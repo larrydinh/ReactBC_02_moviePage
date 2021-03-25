@@ -18,7 +18,7 @@ class Home extends Component {
     // });
     // //Xu ly thanh cong
     // promise.then((result) => {
-    //     console.log("result", result.data);
+    //     console.log("result", result.data);  
     //     // lay du lieu ve dispatch len reducer 
     //     this.props.dispatch({
     //       type: 'LAY_DANH_SACH_PHIM',
