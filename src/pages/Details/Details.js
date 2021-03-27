@@ -1,45 +1,105 @@
-import React,{useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { layThongTinChiTietPhim } from "../../redux/actions/PhimActions";
-
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { layThongTinChiTietPhimAction } from "../../redux/actions/PhimActions";
+import moment from "moment";
 export default function Details(props) {
   const { chiTietPhim } = useSelector((state) => state.PhimReducer);
   const dispatch = useDispatch();
-//   Tu goi API khi trang vua load 
+  //tu goi api khi trang vua load
   useEffect(() => {
-      //Lay tham so tu url
-      let {id} = props.match.params;
-    //   Goi action truyen vao tu id phim 
-      dispatch(layThongTinChiTietPhim(id))
-  }, [])
-  
-  console.log("props", props);
+    // lay tham so tu url
+    let { id } = props.match.params;
+    //goi action truyen vao id phim
+    dispatch(layThongTinChiTietPhimAction(id));
+  }, []);
+  console.log("chiTietPhim", chiTietPhim);
   return (
     <div className="container">
-      {/* {props.match.params.id} */}
       <div className="row mt-5">
         <div className="col-6">
-          <img src={chiTietPhim.hinhAnh} alt={chiTietPhim.tenPhim} />
+          <img src={chiTietPhim.hinhAnh} alt="" className="w-100" />
         </div>
         <div className="col-6">
           <table className="table">
             <thead>
               <tr>
-                <th>Ten phim</th>
+                <th>Ten Phim</th>
                 <th>{chiTietPhim.tenPhim}</th>
-              </tr> 
+              </tr>
               <tr>
-                <th>Mo ta</th>
-                <th>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Facere ea aspernatur quisquam ipsa illum eos minima quam
-                  commodi excepturi officiis neque ab adipisci non perferendis
-                  veniam accusantium, impedit sed voluptatem? Voluptas pariatur
-                  illum fugit ratione?
-                </th>
+                <th>Mo TA</th>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Exercitationem explicabo cum voluptatem saepe, doloremque harum
+                unde dolore praesentium illo eius corrupti eaque recusandae iure
+                <th></th>
               </tr>
             </thead>
           </table>
+        </div>
+      </div>
+      <div className="mt-5">
+        <div className="row">
+          <div
+            className="nav flex-column nav-pills col-4"
+            id="v-pills-tab"
+            role="tablist"
+            aria-orientation="vertical"
+          >
+            {chiTietPhim.heThongRapChieu?.map((heThongRap, index) => {
+              return (
+                <a
+                  key={index}
+                  className="nav-link "
+                  id="v-pills-home-tab"
+                  data-toggle="pill"
+                  href={`#${heThongRap.maHeThongRap}`}
+                  role="tab"
+                  aria-controls={`${heThongRap.maHeThongRap}`}
+                  aria-selected="true"
+                >
+                  <img src={heThongRap.logo} width="50px" alt="" />
+                  {heThongRap.tenHeThongRap}
+                </a>
+              );
+            })}
+          </div>
+          <div className="tab-content col-8" id="v-pills-tabContent ">
+            {chiTietPhim.heThongRapChieu?.map((heThongRap, index) => {
+              const activeClass = index === 0 ? "active" : "";
+              return (
+                <div
+                  key={index}
+                  className={`tab-pane fade ${activeClass}`}
+                  id={`${heThongRap.maHeThongRap}`}
+                  role="tabpanel"
+                  aria-labelledby="v-pills-home-tab"
+                >
+                  {/* Load cum rạp chiếu từ heThongRap */}
+                  {heThongRap.cumRapChieu?.map((cumRap, index) => {
+                    return (
+                      <div key={index}>
+                        <h3>{cumRap.tenCumRap}</h3>
+                        <div className="row">
+                          {cumRap.lichChieuPhim
+                            ?.slice(0, 8)
+                            .map((lichChieu, index) => {
+                              return (
+                                <NavLink to={`/checkout/${lichChieu.maLichChieu}`} className="col-3">
+                                  {moment(lichChieu.ngayChieuGioChieu).format(
+                                    "hh:mm A"
+                                  )}
+                                </NavLink>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
