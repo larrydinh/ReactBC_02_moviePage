@@ -26,7 +26,7 @@ export const layDanhSachPhimAction = () => {
   };
 };
 
-export const layThongTinChiTietPhim = (maPhim) => {
+export const layThongTinChiTietPhimAction = (maPhim) => {
   return async (dispatch) => {
     try {
       let result = await axios({
@@ -35,11 +35,28 @@ export const layThongTinChiTietPhim = (maPhim) => {
       });
       //Sau khi lay du lieu tu api ta se dua du lieu len reducer = dispatch
       dispatch({
-        type:'LAY_CHI_TIET_PHIM',
-        chiTietPhim: result.data
-      })
+        type: "LAY_CHI_TIET_PHIM",
+        chiTietPhim: result.data,
+      });
     } catch (errors) {
       console.log(errors);
+    }
+  };
+};
+
+export const layThongTinPhongVeAction = (maLichChieu) => {
+  return async (dispatch) => {
+    try {
+      const result = await axios({
+        url: `https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
+        method: "GET",
+      });
+      dispatch({
+        type: "LAY_THONG_TIN_PHONG_VE",
+        thongTinPhongVe: result.data,
+      });
+    } catch (errors) {
+      console.log("errors", errors);
     }
   };
 };
