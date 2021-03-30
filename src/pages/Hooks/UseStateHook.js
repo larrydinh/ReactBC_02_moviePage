@@ -19,5 +19,5 @@ let [number,setNumber] = useState(0);
                 setNumber(number +1)
             }}>+</button>
         </div>
-    )
+    )   
 }

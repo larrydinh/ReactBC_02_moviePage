@@ -3,6 +3,7 @@ const stateDefault = {
   chiTietPhim: {
     tenPhim: "hahihi",
   },
+  thongTinPhongVe:{}
 };
 
 export const PhimReducer = (state = stateDefault, action) => {
