@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { layThongTinPhongVeAction } from "../../redux/actions/PhimActions";
+import { taiKhoan } from "../Config/setting";
 import "./Checkout.css";
 
 export default function Checkout(props) {
@@ -8,24 +10,33 @@ export default function Checkout(props) {
   const { danhSachGheDangDat } = useSelector(
     (state) => state.QuanLyDatVeReducer
   );
+  useEffect(() => {
+    dispatch(layThongTinPhongVeAction(id));
+    return () => {
+      dispatch({ type: "resetChosen" });
+    };
+  }, []);
 
   const dispatch = useDispatch();
   let { id } = props.match.params;
 
   const renderGhe = () => {
     return thongTinPhongVe.danhSachGhe?.map((ghe, index) => {
-//Xac dinh ghe dang dat 
-let indexGheDD = danhSachGheDangDat.findIndex(gheDD=>gheDD.maGhe===ghe.maGhe)
-let classGheDangDat=  indexGheDD !==-1?'gheDangDat':'';
+      //Xac dinh ghe dang dat
+      let indexGheDD = danhSachGheDangDat.findIndex(
+        (gheDD) => gheDD.maGhe === ghe.maGhe
+      );
+      let classGheDangDat = indexGheDD !== -1 ? "gheDangDat" : "";
       //Xac dinh ghe da dat va chua dat
       let classGheDaDat = ghe.daDat ? "gheDaDat" : "";
       let classGheVip = ghe.loaiGhe === "Vip" ? "gheVip" : "";
       return (
         <Fragment key={index}>
           <button
-            className={`ghe ${classGheDaDat} ${classGheVip} ${classGheDangDat}`}disabled={ghe.daDat} onClick={() => {dispatch({type:'DAT_GHE',
-          ghe })
-              
+            className={`ghe ${classGheDaDat} ${classGheVip} ${classGheDangDat}`}
+            disabled={ghe.daDat}
+            onClick={() => {
+              dispatch({ type: "DAT_GHE", ghe });
             }}
             onClick={() => {
               dispatch({
@@ -61,9 +72,10 @@ let classGheDangDat=  indexGheDD !==-1?'gheDangDat':'';
       return (TongTien += gheDangDat.giaVe);
     }, 0);
   };
-  useEffect(() => {
-    dispatch(layThongTinPhongVeAction(id));
-  }, []);
+  if (!localStorage.getItem(taiKhoan)) {
+    return <Redirect to="/login" />;
+  }
+
   console.log("thongtinphongve", thongTinPhongVe);
 
   return (
@@ -94,7 +106,7 @@ let classGheDangDat=  indexGheDD !==-1?'gheDangDat':'';
           </div>
           <hr />
           <h3 className="text-warning text-left">
-           Ghe da dat: {renderGheDangDat()}
+            Ghe da dat: {renderGheDangDat()}
           </h3>
           <div>
             <button className="w-100 btn btn-success display-4">Dat Ve</button>

@@ -30,7 +30,9 @@ class Loading extends Component {
     }
     return '';
   };
-  render() {
+  render()
+   {
+     console.log(console.log(this.props.isLoading));
     return <div>{this.renderLoading()}</div>;
   }
 }

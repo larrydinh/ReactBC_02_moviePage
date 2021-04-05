@@ -21,6 +21,10 @@ export const QuanLyDatVeReducer = (state = stateDatVe, action) => {
       state.danhSachGheDangDat = [...state.danhSachGheDangDat];
       return { ...state };
     }
+    case "resetChosen":{
+      state.danhSachGheDangDat=[];
+      return {...state}
+    }
     default:
       return { ...state };
   }

@@ -3,6 +3,7 @@ const stateDefault = {
 };
 
 export const LoadingReducer = (state = stateDefault, action) => {
+  console.log('type',action.type);
   switch (action.type) {
     case "openLoading": {
       state.loading = true;
