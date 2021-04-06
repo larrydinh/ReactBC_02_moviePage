@@ -6,7 +6,7 @@ export const dangNhapAction = (nguoiDung) => {
         try{
             const result =await axios ({
                 url:`${domain}/api/QuanLyNguoiDung/DangNhap`,
-                method: 'POST',
+                method: 'post',
                 data:nguoiDung
             })
             //lay gia tri api gui ve luu vao localstorage

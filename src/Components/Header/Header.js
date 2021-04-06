@@ -4,7 +4,8 @@ import { NavLink } from "react-router-dom";
 // Option +esc 
 
 export default function Header() {
-  const taiKhoan = useSelector((state) => state.NguoiDungReducer);
+  const {taiKhoan} = useSelector((state) => state.NguoiDungReducer);
+  console.log(taiKhoan, 'taiKhoan');
   return (
     // a thay bằng NavLink, href thay bằng to
     // Sẽ nhanh hơn nhiều vì ko có reload lại page
@@ -45,14 +46,20 @@ export default function Header() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                activeStyle={{ fontWeight: "bold" }}
-                activeClassName="bg-dark text-light"
-                className="nav-link"
-                to="/login"
-              >
-                Login
-              </NavLink>
+             
+               {taiKhoan !== "" ? (
+                <span className="nav-link">{taiKhoan}</span>
+              ) : (
+                <NavLink
+                  activeStyle={{ fontWeight: "bold" }}
+                  activeClassName="bg-dark text-light"
+                  className="nav-link"
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              )}
+
             </li>
             <li className="nav-item">
               <NavLink

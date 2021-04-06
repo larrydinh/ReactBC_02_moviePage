@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { layThongTinPhongVeAction } from "../../redux/actions/PhimActions";
+import { datVeActions } from "../../redux/actions/QuanLyDatVeAction";
 import { taiKhoan } from "../Config/setting";
 import "./Checkout.css";
 
@@ -109,7 +110,17 @@ export default function Checkout(props) {
             Ghe da dat: {renderGheDangDat()}
           </h3>
           <div>
-            <button className="w-100 btn btn-success display-4">Dat Ve</button>
+            <button className="w-100 btn btn-success display-4" onClick={() => {
+              //Lay thong tin dang nhap tu localstorage chuyen ve object
+              let userLogin = JSON.parse(localStorage.getItem(taiKhoan));
+              //Tao ra data nhu backend yeu cau thong tin tnguoi dung dat ghe 
+              let thongTinDatVe = {
+                "maLichChieu": props.match.params.id,
+                "danhSachVe": danhSachGheDangDat, 
+                "taiKhoanNguoiDung":userLogin.taiKhoan
+              }
+              dispatch(datVeActions(thongTinDatVe))
+            }}>Dat Ve</button>
           </div>
         </div>
       </div>
